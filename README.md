@@ -1,353 +1,336 @@
-# 💰 FakkaFlow — Personal Budgeting App
+<div align="center">
 
-> CS251 · Introduction to Software Engineering · Cairo University · FCAI · 2026  
-> Team: Beshoy Fomail · Mohamed Tamer · Mazen Magdy · Omar Hassan
+# 💰 FakkaFlow
 
----
+**A personal budgeting desktop app built in Java with JavaFX**
 
-## 📋 Table of Contents
+![Java](https://img.shields.io/badge/Java-17-orange?style=flat-square&logo=openjdk&logoColor=white)
+![JavaFX](https://img.shields.io/badge/JavaFX-21.0.2-blue?style=flat-square&logo=java&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-3.45-lightblue?style=flat-square&logo=sqlite&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-3.6+-red?style=flat-square&logo=apachemaven&logoColor=white)
+![BCrypt](https://img.shields.io/badge/BCrypt-0.4-green?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-informational?style=flat-square&logo=linux)
+![Course](https://img.shields.io/badge/CS251-Software%20Engineering-purple?style=flat-square)
+![University](https://img.shields.io/badge/Cairo%20University-FCAI-darkred?style=flat-square)
 
-- [Overview](#overview)
-- [Features & User Stories](#features--user-stories)
-- [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
-- [Project Structure](#project-structure)
-- [Design Patterns & SOLID](#design-patterns--solid)
-- [Database Schema](#database-schema)
-- [Prerequisites](#prerequisites)
-- [Installation & Running](#installation--running)
-- [How to Use the App](#how-to-use-the-app)
-- [Team Ownership](#team-ownership)
+A full-featured desktop budgeting app with **expense tracking**, **budget alerts**, **financial goals**, and **visual reports** — built on JavaFX with a dark UI theme and SQLite local storage.
+
+</div>
 
 ---
 
-## Overview
+## 🖼️ Showcase
 
-FakkaFlow is a desktop personal budgeting application built with **Java 17** and **JavaFX**. It allows users to track income and expenses, set spending budgets per category, monitor financial goals, receive real-time budget alerts, and generate visual reports — all stored locally in a **SQLite** database with no internet required after setup.
+| Sign Up | Login |
+|--------|-------|
+| ![signup](screenshots/signup.png) | ![login](screenshots/login.png) |
 
----
+| Dashboard | Transactions |
+|-----------|-------------|
+| ![dashboard](screenshots/dashboard.png) | ![transactions](screenshots/transactions.png) |
 
-## Features & User Stories
+| Budget Management | Financial Reports |
+|------------------|-----------------|
+| ![budgets](screenshots/budgets.png) | ![reports](screenshots/reports.png) |
 
-| # | User Story | What it does |
-|---|-----------|-------------|
-| US1 | **Sign Up** | Register with name, email, and password. Password is hashed with BCrypt before storing. Email format and password strength are validated. |
-| US2 | **Login** | Authenticate with email and password. Invalid credentials show a clear error. On success, session is created and user lands on Dashboard. |
-| US3 | **Add Transaction** | Log income or expense with amount, category, and an optional note. Amount is validated (must be > 0). Transaction is saved instantly and reflected on the dashboard. |
-| US4 | **Create / Edit Budget** | Set up a budget cycle (total allowance, start date, end date). Also set per-category spending limits (e.g. Food: 1000 EGP/month). Duplicate category budgets are updated, not duplicated. |
-| US5 | **Budget Over-Limit Alert** | After every transaction, the system checks all category budgets. If a category hits 80% it shows a yellow warning. If it hits 100%+ it shows a red exceeded alert on both the Budget and Dashboard screens. |
-| US6 | **Set & Track Financial Goals** | Create a savings goal with a name, target amount, optional deadline, and initial saved amount. Add contributions over time. A progress bar and monthly savings needed are calculated automatically. |
-| US7 | **Generate Financial Reports** | View spending broken down by category (pie chart), income vs expenses over time (bar chart), and auto-generated insights (top spending category, average per category). Filter by This Month / Last 3 Months / This Year / All Time. |
-
----
-
-## Tech Stack
-
-| Technology | Version | Role |
-|-----------|---------|------|
-| **Java** | 17 | Core application language |
-| **JavaFX** | 21.0.2 | Desktop GUI framework (scenes, controls, charts) |
-| **SQLite** | via JDBC 3.45.1 | Local relational database, no server needed |
-| **jBCrypt** | 0.4 | Secure password hashing (Blowfish algorithm) |
-| **Maven** | 3.6+ | Build tool, dependency management |
-
-### Why these choices?
-
-- **JavaFX** — Cross-platform desktop UI that integrates natively with Java. Supports CSS theming, charts, and rich controls out of the box.
-- **SQLite** — Zero-configuration embedded database. The entire database is one `.db` file that gets created automatically on first run. Perfect for a desktop app with no server.
-- **BCrypt** — Industry-standard password hashing with built-in salting. Protects user passwords even if the `.db` file is accessed directly.
-- **Maven** — Handles all dependency downloads automatically. Every team member runs the same command and gets the same environment.
+| Financial Goals |
+|----------------|
+| ![goals](screenshots/goals.png) |
 
 ---
 
-## Architecture
+## 📄 About
 
-The app follows a strict **3-Layer Architecture** matching the SDS document:
+FakkaFlow is a desktop personal budgeting application developed as part of **CS251 — Introduction to Software Engineering** at Cairo University FCAI. The app was designed and implemented entirely by **Beshoy Fomail**, following a full Software Design Specification (SDS) document covering architecture diagrams, class diagrams, sequence diagrams, SOLID principles, and design patterns.
+
+The goal was to build a real, working budgeting tool — not just a prototype. Every screen, every service, every SQL query, and the full dark UI theme was written from scratch. The app stores all data locally in a SQLite database with no internet connection required after the initial Maven dependency download.
+
+📄 **[Software Design Specification (SDS)](screenshots/fakkaflowSSR.pdf)**
+
+---
+
+## ✨ Features
+
+### Authentication
+- **Sign Up** with name, email, and password — BCrypt hashed before storing, never plain text
+- **Login** with email and password — session created on success, clear error on failure
+- Input validation on all fields (email format, password length, empty fields)
+
+### Transactions
+- Log **income** or **expense** with amount, category, and optional note
+- View all transactions in a sortable table
+- **Filter** by type (income/expense) and category
+- Delete any transaction instantly
+
+### Budgets
+- Set up a **budget cycle** — total allowance, start date, end date
+- Add **per-category spending limits** (e.g. Food: 1000 EGP/month)
+- Live **progress bars** per category — turn yellow at 80%, red at 100%
+- **Budget alerts** shown on both the Budget and Dashboard screens
+
+### Financial Goals
+- Create a **savings goal** with name, target amount, deadline, and initial saved amount
+- Add **contributions** over time
+- Auto-calculates **monthly savings needed** to hit the deadline
+- Progress bar per goal
+
+### Reports
+- **Pie chart** — spending broken down by category
+- **Bar chart** — monthly income vs expenses side by side
+- **Auto insights** — top spending category, average spend per category
+- Filter by **This Month / Last 3 Months / This Year / All Time**
+
+### Dashboard
+- Live **balance** card (income − expenses)
+- **Daily limit** card (remaining budget ÷ days left in cycle)
+- Budget alert badges (yellow/red)
+- Last 5 transactions at a glance
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Language | Java 17 |
+| GUI Framework | JavaFX 21.0.2 |
+| Database | SQLite via JDBC 3.45.1 |
+| Password Hashing | jBCrypt 0.4 (Blowfish) |
+| Build Tool | Maven 3.6+ |
+| Styling | Custom CSS dark theme |
+
+---
+
+## 🏛️ Architecture
+
+3-layer architecture matching the SDS design:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    UI LAYER (JavaFX)                     │
-│  LoginScreen · DashboardScreen · TransactionScreen       │
-│  BudgetScreen · GoalScreen · ReportScreen · SideNav      │
-└───────────────────────┬─────────────────────────────────┘
-                        │ calls
-┌───────────────────────▼─────────────────────────────────┐
-│                   LOGIC LAYER                            │
-│  AuthService · BudgetService · GoalService               │
-│  AlertingService · ValidationService · SessionManager    │
-│  RolloverEngine (Strategy Pattern)                       │
-└───────────────────────┬─────────────────────────────────┘
-                        │ calls
-┌───────────────────────▼─────────────────────────────────┐
-│                   DATA LAYER                             │
-│  SQLiteDatabase · UserRepository · TransactionRepository │
-│  BudgetRepository · CycleRepository · GoalRepository     │
-│  Models: User · Transaction · Category · Budget · Goal   │
-└─────────────────────────────────────────────────────────┘
-                        │
-                  fakkaflow.db (SQLite file)
+┌──────────────────────────────────────────┐
+│            UI LAYER (JavaFX)             │
+│  LoginScreen · SignUpScreen              │
+│  DashboardScreen · TransactionScreen     │
+│  BudgetScreen · GoalScreen · ReportScreen│
+└──────────────────┬───────────────────────┘
+                   │
+┌──────────────────▼───────────────────────┐
+│            LOGIC LAYER                   │
+│  AuthService · BudgetService             │
+│  GoalService · AlertingService           │
+│  ValidationService · SessionManager      │
+│  RolloverEngine (Strategy Pattern)       │
+└──────────────────┬───────────────────────┘
+                   │
+┌──────────────────▼───────────────────────┐
+│            DATA LAYER                    │
+│  SQLiteDatabase · UserRepository         │
+│  TransactionRepository · BudgetRepository│
+│  CycleRepository · GoalRepository        │
+│  Models: User · Transaction · Budget ... │
+└──────────────────────────────────────────┘
+                   │
+             fakkaflow.db
 ```
-
-Each layer only talks to the layer directly below it. The UI never touches SQL. The logic layer never builds JavaFX nodes. This makes each layer independently testable and replaceable.
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 fakkaflow/
-├── pom.xml                                   ← Maven config: deps, Java version, build plugins
-├── README.md                                 ← This file
+├── pom.xml                                   ← Maven: deps, Java version, build plugins
+├── README.md
+├── screenshots/                              ← App screenshots + SDS document
+│   └── fakkaflowSSR.pdf                      ← Full Software Design Specification
 │
 └── src/main/
     ├── resources/
-    │   └── styles.css                        ← Full dark theme: colors, fonts, cards, tables, charts
+    │   └── styles.css                        ← Full dark theme stylesheet
     │
     └── java/com/fakkaflow/
-        │
-        ├── MainApp.java                      ← JavaFX Application subclass, DB init, first scene
+        ├── MainApp.java                      ← JavaFX entry point, DB init, first scene
         │
         ├── data/
         │   ├── model/
-        │   │   ├── User.java                 ← id, name, email, passwordHash, createdAt
-        │   │   ├── Transaction.java          ← id, userId, amount, type, categoryId, note, timestamp
-        │   │   ├── Category.java             ← id, name (Food / Transport / Health / ...)
-        │   │   ├── Budget.java               ← id, categoryId, amountLimit, period, spent (computed)
-        │   │   ├── BudgetCycle.java          ← id, totalAllowance, startDate, endDate
-        │   │   └── Goal.java                 ← id, name, targetAmount, savedAmount, deadline
+        │   │   ├── User.java
+        │   │   ├── Transaction.java
+        │   │   ├── Category.java
+        │   │   ├── Budget.java
+        │   │   ├── BudgetCycle.java
+        │   │   └── Goal.java
         │   │
         │   └── repository/
-        │       ├── SQLiteDatabase.java       ← Singleton DB connection, schema init, raw query/execute
-        │       ├── UserRepository.java       ← findByEmail(), findById(), save()
-        │       ├── TransactionRepository.java← save(), update(), delete(), findAll(), findByFilter()
-        │       ├── CategoryRepository.java   ← findAll(), save() — seeded with 8 defaults
-        │       ├── BudgetRepository.java     ← save() with upsert logic, findAll(), delete()
-        │       ├── CycleRepository.java      ← save() replaces old cycle, load(), delete()
-        │       └── GoalRepository.java       ← save(), updateSavedAmount(), findAll(), delete()
+        │       ├── SQLiteDatabase.java       ← Singleton connection, schema init, raw SQL
+        │       ├── UserRepository.java
+        │       ├── TransactionRepository.java
+        │       ├── CategoryRepository.java
+        │       ├── BudgetRepository.java
+        │       ├── CycleRepository.java
+        │       └── GoalRepository.java
         │
         ├── logic/
         │   ├── service/
-        │   │   ├── AuthService.java          ← registerUser() → validates → bcrypt → save → session
-        │   │   │                               loginUser() → validate → bcrypt.check → session
-        │   │   ├── ValidationService.java    ← validateEmail(), validatePasswordStrength(),
-        │   │   │                               validateAmount(), validateAmountString(), validateName()
-        │   │   ├── SessionManager.java       ← Singleton holding currentUser, createSession(), logout()
-        │   │   ├── BudgetService.java        ← calculateSafeDailyLimit(), calculateRemainingBalance(),
-        │   │   │                               startCycle(), saveBudget(), getBudgets(), handleRollover()
-        │   │   ├── AlertingService.java      ← checkBudgets() → returns list of BudgetAlerts
-        │   │   │                               with level NONE / WARNING (≥80%) / EXCEEDED (≥100%)
-        │   │   └── GoalService.java          ← saveGoal(), addContribution(), deleteGoal(),
-        │   │                                   calculateMonthlySavingsNeeded()
+        │   │   ├── AuthService.java          ← registerUser(), loginUser()
+        │   │   ├── ValidationService.java
+        │   │   ├── SessionManager.java       ← Singleton session holder
+        │   │   ├── BudgetService.java        ← Daily limit, remaining balance calculations
+        │   │   ├── AlertingService.java      ← WARNING ≥80% · EXCEEDED ≥100%
+        │   │   └── GoalService.java
         │   │
         │   └── engine/
-        │       └── RolloverEngine.java       ← calculateUnspent(), redistributeUnspent()
-        │                                       Designed as Strategy Pattern (swappable algorithms)
+        │       └── RolloverEngine.java       ← Strategy Pattern: leftover budget logic
         │
         └── ui/
             ├── util/
-            │   ├── SceneManager.java         ← Singleton holding Stage, navigateTo() switches scenes
-            │   └── UIFactory.java            ← Factory for styled controls: primaryBtn(), styledField(),
-            │                                   card(), alertBadge(), heading(), errorLabel(), ...
+            │   ├── SceneManager.java         ← Singleton stage holder, navigateTo()
+            │   └── UIFactory.java            ← Reusable styled controls factory
             │
             └── view/
-                ├── LoginScreen.java          ← US2: email + password fields, error label, link to sign up
-                ├── SignUpScreen.java         ← US1: name/email/pass/confirm fields, feature highlights panel
-                ├── SideNav.java             ← Sidebar with nav buttons, active state, logout button
-                ├── DashboardScreen.java     ← Balance/income/expense/daily-limit cards,
-                │                              cycle progress bar, budget alerts, recent 5 transactions
-                ├── TransactionScreen.java   ← US3+US9: TableView of all transactions, type+category
-                │                              filter bar, Add Transaction dialog with validation
-                ├── BudgetScreen.java        ← US4+US5: cycle setup dialog, category budget cards
-                │                              with progress bars and color-coded alerts
-                ├── GoalScreen.java          ← US6: goal cards with progress bars, Add Goal dialog,
-                │                              Contribute dialog, monthly savings calculation
-                └── ReportScreen.java        ← US7: period selector, summary cards, PieChart by category,
-                                               BarChart income vs expenses by month, insight badges
+                ├── LoginScreen.java
+                ├── SignUpScreen.java
+                ├── SideNav.java
+                ├── DashboardScreen.java
+                ├── TransactionScreen.java
+                ├── BudgetScreen.java
+                ├── GoalScreen.java
+                └── ReportScreen.java
 ```
 
 ---
 
-## Design Patterns & SOLID
+## 🎨 Design Patterns & SOLID
 
 ### Strategy Pattern — `RolloverEngine`
 
-The rollover behavior (what happens to unspent budget at end of cycle) is isolated in `RolloverEngine`. `BudgetService` is the context that delegates to it. You can swap strategies without touching `BudgetService`:
-
 ```
 BudgetService (Context)
-    └── uses → RolloverEngine (Concrete Strategy)
+    └── delegates to → RolloverEngine (Concrete Strategy)
 
-Future strategies you can add:
-    ├── NoRolloverStrategy       → reset budget to zero each cycle
+Swappable without touching BudgetService:
+    ├── NoRolloverStrategy       → reset to zero each cycle
     ├── StandardRolloverStrategy → carry full remainder forward
-    └── SmartRolloverStrategy    → redistribute by category spending history
+    └── SmartRolloverStrategy    → redistribute by category history
 ```
 
 ### SOLID Principles
 
 | Principle | How it's applied |
 |-----------|-----------------|
-| **S** — Single Responsibility | `TransactionRepository` only does SQL. `BudgetService` only does calculations. `AlertingService` only checks thresholds. No class does more than one job. |
-| **O** — Open/Closed | `RolloverEngine` can be extended with new strategies without modifying `BudgetService`. |
-| **I** — Interface Segregation | `ILoginView` and `IDashboardView` define only the methods each screen actually needs. Screens don't implement methods they don't use. |
-| **D** — Dependency Inversion | `HistoryUIController` depends on `TransactionRepository` (abstraction), not on `SQLiteDatabase` directly. Swapping the DB engine only requires changing the repository layer. |
+| **S** Single Responsibility | Each class has one job — `AlertingService` only checks thresholds, `TransactionRepository` only does SQL |
+| **O** Open/Closed | New rollover strategies extend `RolloverEngine` without modifying `BudgetService` |
+| **I** Interface Segregation | `ILoginView` and `IDashboardView` expose only what each screen needs |
+| **D** Dependency Inversion | Controllers depend on repositories, never directly on `SQLiteDatabase` |
 
 ---
 
-## Database Schema
+## 🗄️ Database Schema
 
-The file `fakkaflow.db` is created automatically on first run.
+`fakkaflow.db` is created automatically on first run — no setup needed.
 
 ```sql
-users
-  id INTEGER PRIMARY KEY AUTOINCREMENT
-  name TEXT NOT NULL
-  email TEXT UNIQUE NOT NULL
-  password_hash TEXT NOT NULL          ← BCrypt hash, never plain text
-  created_at TEXT DEFAULT datetime()
-
-categories
-  id INTEGER PRIMARY KEY AUTOINCREMENT
-  name TEXT UNIQUE NOT NULL            ← Pre-seeded: Food, Transport, Shopping,
-                                          Health, Entertainment, Utilities, Salary, Other
-
-transactions
-  id INTEGER PRIMARY KEY AUTOINCREMENT
-  user_id INTEGER → users.id
-  amount REAL NOT NULL
-  type TEXT NOT NULL                   ← 'income' or 'expense'
-  category_id INTEGER → categories.id
-  note TEXT
-  timestamp TEXT DEFAULT datetime()
-
-budget_cycles
-  id INTEGER PRIMARY KEY AUTOINCREMENT
-  user_id INTEGER → users.id
-  total_allowance REAL NOT NULL
-  start_date TEXT NOT NULL
-  end_date TEXT NOT NULL
-
-budgets
-  id INTEGER PRIMARY KEY AUTOINCREMENT
-  user_id INTEGER → users.id
-  category_id INTEGER → categories.id
-  amount_limit REAL NOT NULL
-  period TEXT NOT NULL                 ← 'Monthly', 'Weekly', 'Daily'
-
-goals
-  id INTEGER PRIMARY KEY AUTOINCREMENT
-  user_id INTEGER → users.id
-  name TEXT NOT NULL
-  target_amount REAL NOT NULL
-  saved_amount REAL DEFAULT 0
-  deadline TEXT
-  created_at TEXT DEFAULT datetime()
+users         → id, name, email, password_hash, created_at
+categories    → id, name  (seeded: Food · Transport · Shopping · Health · Entertainment · Utilities · Salary · Other)
+transactions  → id, user_id, amount, type, category_id, note, timestamp
+budget_cycles → id, user_id, total_allowance, start_date, end_date
+budgets       → id, user_id, category_id, amount_limit, period
+goals         → id, user_id, name, target_amount, saved_amount, deadline, created_at
 ```
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
-| Requirement | Minimum Version | Check with |
-|-------------|----------------|------------|
-| Java JDK | 17 | `java -version` |
-| Maven | 3.6 | `mvn -version` |
+| Tool | Version |
+|------|---------|
+| Java JDK | 17+ |
+| Maven | 3.6+ |
 
-### Install on your OS
-
-**Arch Linux / EndeavourOS:**
+**Arch / EndeavourOS:**
 ```bash
-sudo pacman -Syu
 sudo pacman -S jdk17-openjdk maven
 ```
 
+<details>
+<summary>Other operating systems</summary>
+
 **Ubuntu / Debian:**
 ```bash
-sudo apt update
 sudo apt install openjdk-17-jdk maven
 ```
 
-**macOS (Homebrew):**
+**macOS:**
 ```bash
 brew install openjdk@17 maven
 ```
 
 **Windows:**
-1. Download JDK 17 from https://adoptium.net
-2. Download Maven from https://maven.apache.org/download.cgi
-3. Add both `bin/` folders to your `PATH` environment variable
+- JDK 17: https://adoptium.net
+- Maven: https://maven.apache.org/download.cgi
+- Add both `bin/` folders to your `PATH`
+
+</details>
 
 ---
 
-## Installation & Running
+## 🚀 Installation & Running
 
 ```bash
-# 1. Clone or extract the project
-cd fakkaflow/
+# Clone the repo
+git clone https://github.com/beshoy-13/fakkaflow.git
+cd fakkaflow
 
-# 2. First run (downloads dependencies ~30MB, takes 1-2 min)
+# First run — downloads dependencies (~30MB, one time only)
 mvn javafx:run
 
-# 3. Every run after that (instant)
+# Every run after — instant
 mvn javafx:run
 ```
 
-On first launch, `fakkaflow.db` is created in your working directory with all tables and default categories seeded.
+`fakkaflow.db` is created automatically in the working directory on first launch.
 
 ### Running from an IDE
 
 **IntelliJ IDEA:**
 1. File → Open → select the `fakkaflow/` folder
-2. IntelliJ detects it as a Maven project automatically
-3. Wait for indexing to finish
-4. Open `MainApp.java` → click the green ▶ Run button
+2. IntelliJ auto-detects Maven — wait for indexing
+3. Open `MainApp.java` → click ▶
 
 **Eclipse:**
 1. File → Import → Maven → Existing Maven Projects
-2. Browse to the `fakkaflow/` folder → Finish
-3. Right-click `MainApp.java` → Run As → Java Application
+2. Right-click `MainApp.java` → Run As → Java Application
 
 ---
 
-## How to Use the App
+## 🧪 Testing Tips
 
-```
-Launch app
-    │
-    ▼
-Login Screen ──────────────────────────────────────── Sign Up Screen
-    │  Enter email + password                              │  Name, email, password
-    │  → lands on Dashboard                               │  → lands on Dashboard
-    ▼
-Dashboard
-    ├── Balance card      (income − expenses)
-    ├── Daily Limit card  (remaining ÷ days left in cycle)
-    ├── Budget Alerts     (yellow = near limit, red = exceeded)
-    └── Recent 5 transactions
-    │
-    ├── [Transactions] → View all · Filter by type/category · Add new transaction
-    │
-    ├── [Budgets] → Setup cycle (allowance + dates) · Add per-category limits
-    │              Progress bars turn yellow at 80%, red at 100%
-    │
-    ├── [Goals] → Create savings goal · Add contributions · Track progress bar
-    │             See monthly amount needed to reach goal by deadline
-    │
-    └── [Reports] → Select time period · View pie chart (spending by category)
-                    Bar chart (monthly income vs expenses) · Read auto insights
+**Load your account with test money instantly:**
+> Transactions → **+ Add Transaction** → Type: `income` → Amount: `999999` → Category: `Salary` → Save
+
+**Trigger a budget alert step by step:**
+1. Budgets → Setup Cycle → allowance `5000 EGP`
+2. Add Category Budget → Food → limit `200 EGP`
+3. Add expense → Food → `180 EGP` → yellow warning appears
+4. Add another Food expense → `30 EGP` → turns red (exceeded)
+
+**Inspect the database directly:**
+```bash
+sqlite3 fakkaflow.db "SELECT id, name, email FROM users;"
 ```
 
 ---
 
-## Team Ownership
+## 👤 Author
 
-| Member | Contributions |
-|--------|--------------|
-| **Mohamed Tamer** | Class diagram, Sequence diagrams 9, SOLID principles write-up, Strategy Pattern |
-| **Beshoy Fomail** | Architecture diagram, Sequence diagrams 1 & 11 |
-| **Mazen Magdy** | Sequence diagrams 5, 6, 7, 10 |
-| **Omar Hassan** | Sequence diagrams 2, 3, 4, 8 |
+**Beshoy Fomail**
+
+[![GitHub](https://img.shields.io/badge/GitHub-beshoy--13-181717?style=flat-square&logo=github)](https://github.com/beshoy-13)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Beshoy%20Fomail-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/beshoy-fomail)
+[![Email](https://img.shields.io/badge/Email-beshoy.f.labib%40outlook.com-0078D4?style=flat-square&logo=microsoft-outlook)](mailto:beshoy.f.labib@outlook.com)
 
 ---
 
-*Built with ☕ Java · 📐 SDS-driven design · 🗄️ SQLite · 🎨 JavaFX*
+<div align="center">
+
+*CS251 — Introduction to Software Engineering · Cairo University FCAI · 2026*
+
+</div>
