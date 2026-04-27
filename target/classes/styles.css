@@ -1,0 +1,478 @@
+/* ─── Root & Base ─────────────────────────────────────────────────────────── */
+.root {
+    -fx-font-family: "Segoe UI", "SF Pro Display", "Inter", sans-serif;
+    -fx-background-color: #0f1117;
+    -fx-text-fill: #e2e8f0;
+}
+
+/* ─── Auth Screens ─────────────────────────────────────────────────────────── */
+.auth-root {
+    -fx-background-color: #0f1117;
+}
+
+.auth-left {
+    -fx-background-color: linear-gradient(to bottom right, #1a1f35, #0f1117);
+    -fx-min-width: 420px;
+    -fx-max-width: 480px;
+}
+
+.auth-right {
+    -fx-background-color: #13171f;
+    -fx-min-width: 460px;
+}
+
+.brand-title {
+    -fx-text-fill: #6366f1;
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+}
+
+.brand-tagline {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 17px;
+    -fx-text-alignment: center;
+}
+
+.feature-item {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 15px;
+    -fx-padding: 4 0 4 0;
+}
+
+/* ─── Form Controls ─────────────────────────────────────────────────────────── */
+.styled-field {
+    -fx-background-color: #1e2433;
+    -fx-text-fill: #e2e8f0;
+    -fx-prompt-text-fill: #64748b;
+    -fx-border-color: #2d3748;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 12 14 12 14;
+    -fx-font-size: 14px;
+    -fx-pref-height: 44px;
+}
+
+.styled-field:focused {
+    -fx-border-color: #6366f1;
+    -fx-background-color: #1e2433;
+}
+
+.styled-combo {
+    -fx-background-color: #1e2433;
+    -fx-text-fill: #e2e8f0;
+    -fx-border-color: #2d3748;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 6 10 6 10;
+    -fx-font-size: 14px;
+}
+
+.styled-combo .list-cell {
+    -fx-background-color: #1e2433;
+    -fx-text-fill: #e2e8f0;
+}
+
+.styled-combo .list-view {
+    -fx-background-color: #1e2433;
+    -fx-border-color: #2d3748;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────────────────── */
+.btn-primary {
+    -fx-background-color: #6366f1;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 12 20 12 20;
+    -fx-cursor: hand;
+    -fx-pref-height: 44px;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #4f46e5;
+}
+
+.btn-primary:pressed {
+    -fx-background-color: #4338ca;
+}
+
+.btn-secondary {
+    -fx-background-color: #1e2433;
+    -fx-text-fill: #a5b4fc;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-border-color: #6366f1;
+    -fx-border-radius: 8;
+    -fx-border-width: 1.5;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #252d40;
+}
+
+.btn-danger {
+    -fx-background-color: #7f1d1d;
+    -fx-text-fill: #fca5a5;
+    -fx-font-size: 12px;
+    -fx-background-radius: 6;
+    -fx-padding: 6 12 6 12;
+    -fx-cursor: hand;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #991b1b;
+}
+
+.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: #64748b;
+    -fx-font-size: 13px;
+    -fx-background-radius: 6;
+    -fx-border-color: #2d3748;
+    -fx-border-radius: 6;
+    -fx-padding: 6 12 6 12;
+    -fx-cursor: hand;
+}
+
+.link-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #6366f1;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-underline: false;
+    -fx-font-weight: bold;
+}
+
+.link-btn:hover {
+    -fx-text-fill: #818cf8;
+}
+
+/* ─── Labels ─────────────────────────────────────────────────────────────── */
+.heading {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.subheading {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 14px;
+}
+
+.error-label {
+    -fx-text-fill: #f87171;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 0 0 0;
+}
+
+.muted-text {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+}
+
+.info-value {
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* ─── Navigation ─────────────────────────────────────────────────────────── */
+.sidenav {
+    -fx-background-color: #0d1117;
+    -fx-border-color: #1e2433;
+    -fx-border-width: 0 1 0 0;
+    -fx-min-width: 220px;
+    -fx-max-width: 220px;
+}
+
+.nav-brand {
+    -fx-text-fill: #6366f1;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.nav-user {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 13px;
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER-LEFT;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12 10 12;
+    -fx-cursor: hand;
+}
+
+.nav-btn:hover {
+    -fx-background-color: #1e2433;
+    -fx-text-fill: #e2e8f0;
+}
+
+.nav-btn-active {
+    -fx-background-color: #1e2433;
+    -fx-text-fill: #6366f1;
+    -fx-font-weight: bold;
+    -fx-border-color: #6366f1;
+    -fx-border-width: 0 0 0 3;
+}
+
+.nav-logout {
+    -fx-background-color: transparent;
+    -fx-text-fill: #64748b;
+    -fx-font-size: 13px;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12 10 12;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER-LEFT;
+}
+
+.nav-logout:hover {
+    -fx-background-color: #1e2433;
+    -fx-text-fill: #f87171;
+}
+
+/* ─── App Layout ─────────────────────────────────────────────────────────── */
+.app-root {
+    -fx-background-color: #0f1117;
+}
+
+.content-area {
+    -fx-background-color: #0f1117;
+}
+
+/* ─── Cards ─────────────────────────────────────────────────────────────── */
+.card {
+    -fx-background-color: #13171f;
+    -fx-background-radius: 12;
+    -fx-border-color: #1e2433;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+}
+
+.card-title {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-transform: uppercase;
+    -fx-padding: 0 0 8 0;
+}
+
+.stat-card {
+    -fx-background-color: #13171f;
+    -fx-background-radius: 12;
+    -fx-border-color: #1e2433;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+}
+
+.stat-label {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.stat-value {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 0 0 0;
+}
+
+.stat-positive { -fx-text-fill: #22c55e; }
+.stat-negative { -fx-text-fill: #ef4444; }
+.stat-neutral  { -fx-text-fill: #f1f5f9; }
+
+/* ─── Tables ─────────────────────────────────────────────────────────────── */
+.styled-table {
+    -fx-background-color: #13171f;
+    -fx-border-color: #1e2433;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+.styled-table .column-header-background {
+    -fx-background-color: #1e2433;
+}
+
+.styled-table .column-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.styled-table .table-row-cell {
+    -fx-background-color: #13171f;
+    -fx-text-fill: #e2e8f0;
+    -fx-border-color: transparent transparent #1a2035 transparent;
+}
+
+.styled-table .table-row-cell:selected {
+    -fx-background-color: #1e2a45;
+}
+
+.styled-table .table-row-cell:hover {
+    -fx-background-color: #1a2035;
+}
+
+.styled-table .table-cell {
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 13px;
+    -fx-padding: 10 8 10 8;
+}
+
+/* ─── Transaction Rows (Dashboard) ─────────────────────────────────────── */
+.transaction-row {
+    -fx-padding: 10 0 10 0;
+    -fx-border-color: transparent transparent #1e2433 transparent;
+    -fx-border-width: 1;
+}
+
+.tx-category { -fx-text-fill: #e2e8f0; -fx-font-size: 14px; -fx-font-weight: bold; }
+.tx-note     { -fx-text-fill: #64748b; -fx-font-size: 12px; }
+.tx-amount   { -fx-font-size: 15px; -fx-font-weight: bold; }
+.tx-income   { -fx-text-fill: #22c55e; }
+.tx-expense  { -fx-text-fill: #ef4444; }
+
+/* ─── Progress Bars ─────────────────────────────────────────────────────── */
+.progress-bar {
+    -fx-background-color: #1e2433;
+    -fx-background-radius: 4;
+}
+
+.progress-bar .bar {
+    -fx-background-radius: 4;
+}
+
+.cycle-progress .bar { -fx-background-color: #6366f1; }
+.budget-progress .bar { -fx-background-color: #6366f1; }
+.goal-progress .bar { -fx-background-color: #6366f1; }
+
+.progress-ok .bar    { -fx-background-color: #22c55e; }
+.progress-warning .bar { -fx-background-color: #f59e0b; }
+.progress-danger .bar  { -fx-background-color: #ef4444; }
+
+/* ─── Alert Badges ─────────────────────────────────────────────────────── */
+.alert-badge {
+    -fx-background-radius: 8;
+    -fx-padding: 10 16 10 16;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-max-width: infinity;
+}
+
+.alert-warning  { -fx-background-color: #451a03; -fx-text-fill: #fbbf24; -fx-border-color: #92400e; -fx-border-radius: 8; -fx-border-width: 1; }
+.alert-exceeded { -fx-background-color: #450a0a; -fx-text-fill: #f87171; -fx-border-color: #991b1b; -fx-border-radius: 8; -fx-border-width: 1; }
+.alert-info     { -fx-background-color: #172554; -fx-text-fill: #93c5fd; -fx-border-color: #1e3a8a; -fx-border-radius: 8; -fx-border-width: 1; }
+
+/* ─── Budget Rows ─────────────────────────────────────────────────────── */
+.budget-row {
+    -fx-padding: 14 0 14 0;
+    -fx-border-color: transparent transparent #1e2433 transparent;
+    -fx-border-width: 1;
+}
+
+.budget-cat { -fx-text-fill: #e2e8f0; -fx-font-size: 15px; -fx-font-weight: bold; }
+
+/* ─── Goal Cards ─────────────────────────────────────────────────────── */
+.goal-card {
+    -fx-background-color: #13171f;
+    -fx-background-radius: 14;
+    -fx-border-color: #1e2433;
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-spacing: 14;
+}
+
+.goal-name { -fx-text-fill: #e2e8f0; -fx-font-size: 17px; -fx-font-weight: bold; }
+
+/* ─── Filter Row ─────────────────────────────────────────────────────── */
+.filter-row {
+    -fx-background-color: #13171f;
+    -fx-background-radius: 10;
+    -fx-border-color: #1e2433;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 14;
+}
+
+.filter-row .label { -fx-text-fill: #94a3b8; -fx-font-size: 13px; }
+
+/* ─── Dialog Pane ─────────────────────────────────────────────────────── */
+.dialog-pane {
+    -fx-background-color: #13171f;
+    -fx-border-color: #2d3748;
+    -fx-border-radius: 12;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #1e2433;
+}
+
+.dialog-pane .content {
+    -fx-background-color: #13171f;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #6366f1;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
+}
+
+.dialog-pane .label { -fx-text-fill: #94a3b8; -fx-font-size: 13px; }
+
+/* ─── Charts ─────────────────────────────────────────────────────────── */
+.chart {
+    -fx-background-color: transparent;
+    -fx-plot-background-color: transparent;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-content {
+    -fx-background-color: transparent;
+}
+
+.axis { -fx-tick-label-fill: #64748b; }
+.axis-label { -fx-text-fill: #64748b; }
+
+.default-color0.chart-bar { -fx-bar-fill: #6366f1; }
+.default-color1.chart-bar { -fx-bar-fill: #ef4444; }
+
+.chart-legend { -fx-background-color: transparent; }
+.chart-legend-item-symbol { -fx-background-radius: 50%; }
+.chart-legend-item { -fx-text-fill: #94a3b8; }
+
+.chart-pie-label { -fx-fill: #e2e8f0; -fx-font-size: 11px; }
+.chart-pie-label-line { -fx-stroke: #2d3748; }
+
+/* ─── Separator ─────────────────────────────────────────────────────────── */
+.separator .line { -fx-border-color: #1e2433; }
+
+/* ─── ScrollBar ─────────────────────────────────────────────────────────── */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #2d3748;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .track { -fx-background-color: transparent; }
+.scroll-bar .increment-button, .scroll-bar .decrement-button { -fx-background-color: transparent; }
