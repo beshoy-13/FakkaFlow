@@ -203,39 +203,54 @@
 
 .nav-btn {
     -fx-background-color: transparent;
-    -fx-text-fill: #94a3b8;
-    -fx-font-size: 14px;
     -fx-alignment: CENTER-LEFT;
     -fx-background-radius: 8;
-    -fx-padding: 10 12 10 12;
+    -fx-padding: 8 12 8 12;
     -fx-cursor: hand;
 }
 
 .nav-btn:hover {
     -fx-background-color: #1e2433;
-    -fx-text-fill: #e2e8f0;
 }
 
 .nav-btn-active {
-    -fx-background-color: #1e2433;
-    -fx-text-fill: #6366f1;
+    -fx-background-color: #1a2035;
+    -fx-background-radius: 8;
+}
+
+.nav-btn-text {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 13px;
+}
+
+.nav-btn:hover .nav-btn-text {
+    -fx-text-fill: #cbd5e1;
+}
+
+.nav-btn-text-active {
+    -fx-text-fill: #a5b4fc;
+    -fx-font-size: 13px;
     -fx-font-weight: bold;
-    -fx-border-color: #6366f1;
-    -fx-border-width: 0 0 0 3;
 }
 
 .nav-logout {
     -fx-background-color: transparent;
-    -fx-text-fill: #64748b;
-    -fx-font-size: 13px;
     -fx-background-radius: 8;
-    -fx-padding: 10 12 10 12;
+    -fx-padding: 8 12 8 12;
     -fx-cursor: hand;
     -fx-alignment: CENTER-LEFT;
 }
 
 .nav-logout:hover {
     -fx-background-color: #1e2433;
+}
+
+.nav-logout-text {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 13px;
+}
+
+.nav-logout:hover .nav-logout-text {
     -fx-text-fill: #f87171;
 }
 
