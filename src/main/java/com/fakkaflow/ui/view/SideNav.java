@@ -9,7 +9,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 
 public class SideNav {
-    public enum NavItem { DASHBOARD, TRANSACTIONS, BUDGET, GOALS, REPORTS }
+    public enum NavItem { DASHBOARD, TRANSACTIONS, BUDGET, GOALS, REPORTS, PROFILE }
 
     public VBox build(NavItem active) {
         VBox nav = new VBox(4);
@@ -37,6 +37,7 @@ public class SideNav {
         addNavBtn(nav, "—", "Budgets",      NavItem.BUDGET,       active);
         addNavBtn(nav, "—", "Goals",        NavItem.GOALS,        active);
         addNavBtn(nav, "—", "Reports",      NavItem.REPORTS,      active);
+        addNavBtn(nav, "—", "Profile",      NavItem.PROFILE,      active);
 
         Region filler = new Region();
         VBox.setVgrow(filler, Priority.ALWAYS);
@@ -148,6 +149,7 @@ public class SideNav {
             case BUDGET       -> sm.navigateTo(new BudgetScreen().build(),      "Budgets");
             case GOALS        -> sm.navigateTo(new GoalScreen().build(),        "Goals");
             case REPORTS      -> sm.navigateTo(new ReportScreen().build(),      "Reports");
+            case PROFILE      -> sm.navigateTo(new ProfileScreen().build(),     "Profile");
         }
     }
 

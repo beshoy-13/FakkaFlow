@@ -105,6 +105,15 @@ public class SQLiteDatabase {
                     created_at TEXT DEFAULT (datetime('now')),
                     FOREIGN KEY(user_id) REFERENCES users(id)
                 )""");
+            execute("""
+                CREATE TABLE IF NOT EXISTS user_settings (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER UNIQUE NOT NULL,
+                    currency TEXT DEFAULT 'EGP',
+                    language TEXT DEFAULT 'English',
+                    notifications_enabled INTEGER DEFAULT 1,
+                    FOREIGN KEY(user_id) REFERENCES users(id)
+                )""");
             seedCategories();
         } catch (SQLException e) {
             throw new RuntimeException("DB init failed: " + e.getMessage(), e);

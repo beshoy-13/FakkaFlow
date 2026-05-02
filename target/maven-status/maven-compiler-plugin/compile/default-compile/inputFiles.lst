@@ -5,6 +5,7 @@
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/model/Goal.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/model/Transaction.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/model/User.java
+/home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/model/UserSettingsRepository.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/repository/BudgetRepository.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/repository/CategoryRepository.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/repository/CycleRepository.java
@@ -12,6 +13,7 @@
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/repository/SQLiteDatabase.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/repository/TransactionRepository.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/repository/UserRepository.java
+/home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/data/repository/UserSettings.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/logic/engine/RolloverEngine.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/logic/service/AlertingService.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/logic/service/AuthService.java
@@ -25,6 +27,7 @@
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/ui/view/DashboardScreen.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/ui/view/GoalScreen.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/ui/view/LoginScreen.java
+/home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/ui/view/ProfileScreen.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/ui/view/ReportScreen.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/ui/view/SideNav.java
 /home/beshoy/Codes/fakkaflow/src/main/java/com/fakkaflow/ui/view/SignUpScreen.java
