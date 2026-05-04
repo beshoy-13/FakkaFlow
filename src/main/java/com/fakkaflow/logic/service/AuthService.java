@@ -3,12 +3,22 @@ package com.fakkaflow.logic.service;
 import com.fakkaflow.data.model.User;
 import com.fakkaflow.data.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
-
+/**
+ * Service responsible for user authentication and session handling.
+ */
 public class AuthService {
     private final UserRepository userRepository = new UserRepository();
     private final ValidationService validationService = new ValidationService();
     private final SessionManager sessionManager = SessionManager.getInstance();
-
+    /**
+     * Registers a new user.
+     *
+     * @param name user nameطب
+     * @param email user email
+     * @param password raw password
+     * @return created User
+     * @throws Exception if validation fails
+     */
     public User registerUser(String name, String email, String password) throws Exception {
         if (!validationService.validateName(name))
             throw new Exception("Name cannot be empty.");
@@ -33,7 +43,14 @@ public class AuthService {
         sessionManager.createSession(user.getId());
         return user;
     }
-
+    /**
+     * Logs in a user.
+     *
+     * @param email user email
+     * @param password raw password
+     * @return authenticated user
+     * @throws Exception if login fails
+     */
     public User loginUser(String email, String password) throws Exception {
         if (!validationService.validateEmail(email))
             throw new Exception("Invalid email format.");
@@ -48,7 +65,9 @@ public class AuthService {
         sessionManager.createSession(user.getId());
         return user;
     }
-
+    /**
+     * Logs out the current user.
+     */
     public void logout() {
         sessionManager.logout();
     }

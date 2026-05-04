@@ -3,10 +3,14 @@ package com.fakkaflow.data.repository;
 import com.fakkaflow.data.model.Transaction;
 import java.sql.*;
 import java.util.*;
-
+/**
+ * Repository class for managing Transaction entities.
+ */
 public class TransactionRepository {
     private final SQLiteDatabase db = SQLiteDatabase.getInstance();
-
+    /**
+     * Inserts a transaction.
+     */
     public void save(Transaction t) {
         try {
             db.executeInsert(
@@ -15,7 +19,9 @@ public class TransactionRepository {
             );
         } catch (SQLException e) { e.printStackTrace(); }
     }
-
+    /**
+     * Updates a transaction.
+     */
     public void update(Transaction t) {
         try {
             db.execute(
@@ -24,7 +30,9 @@ public class TransactionRepository {
             );
         } catch (SQLException e) { e.printStackTrace(); }
     }
-
+    /**
+     * Deletes a transaction.
+     */
     public void delete(int transactionId) {
         try {
             db.execute("DELETE FROM transactions WHERE id=?", transactionId);
@@ -42,7 +50,16 @@ public class TransactionRepository {
         } catch (SQLException e) { e.printStackTrace(); }
         return list;
     }
-
+    /**
+     * Retrieves transactions using optional filters.
+     *
+     * @param userId user ID
+     * @param type transaction type (income/expense)
+     * @param categoryId category ID (optional)
+     * @param startDate start date (optional)
+     * @param endDate end date (optional)
+     * @return filtered list of transactions
+     */
     public List<Transaction> findByFilter(int userId, String type, Integer categoryId, String startDate, String endDate) {
         StringBuilder sql = new StringBuilder(
             "SELECT t.*, c.name as cat_name FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id=?"
@@ -61,7 +78,13 @@ public class TransactionRepository {
         } catch (SQLException e) { e.printStackTrace(); }
         return list;
     }
-
+    /**
+     * Calculates total amount by type for a user.
+     *
+     * @param userId user ID
+     * @param type transaction type
+     * @return total amount
+     */
     public float getTotalByTypeAndUser(int userId, String type) {
         try {
             ResultSet rs = db.query(
@@ -73,6 +96,13 @@ public class TransactionRepository {
         return 0;
     }
 
+    /**
+     * Calculates total expenses for a specific category.
+     *
+     * @param userId user ID
+     * @param categoryId category ID
+     * @return total spent amount
+     */
     public float getSpentByCategory(int userId, int categoryId) {
         try {
             ResultSet rs = db.query(
@@ -84,6 +114,12 @@ public class TransactionRepository {
         return 0;
     }
 
+    /**
+     * Calculates total spending grouped by category.
+     *
+     * @param userId user ID
+     * @return map of category name to total spent
+     */
     public Map<String, Float> getSpentByCategory(int userId) {
         Map<String, Float> map = new LinkedHashMap<>();
         try {
@@ -95,7 +131,13 @@ public class TransactionRepository {
         } catch (SQLException e) { e.printStackTrace(); }
         return map;
     }
-
+    /**
+     * Maps a result set row to a Transaction object.
+     *
+     * @param rs result set
+     * @return transaction object
+     * @throws SQLException if error occurs
+     */
     private Transaction mapRow(ResultSet rs) throws SQLException {
         Transaction t = new Transaction();
         t.setTransactionId(rs.getInt("id"));

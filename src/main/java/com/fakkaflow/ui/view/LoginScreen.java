@@ -7,10 +7,17 @@ import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
-
+/**
+ * Login screen for user authentication.
+ * Allows users to sign in and navigate to the dashboard.
+ */
 public class LoginScreen {
     private final AuthService authService = new AuthService();
-
+    /**
+     * Builds the main layout of the login screen.
+     *
+     * @return root Pane
+     */
     public Pane build() {
         HBox root = new HBox();
         root.getStyleClass().add("auth-root");
@@ -23,7 +30,9 @@ public class LoginScreen {
         root.getChildren().addAll(leftPanel, formPanel);
         return root;
     }
-
+    /**
+     * Builds the left branding panel.
+     */
     private VBox buildLeftPanel() {
         VBox panel = new VBox(20);
         panel.getStyleClass().add("auth-left");
@@ -44,6 +53,10 @@ public class LoginScreen {
         panel.getChildren().addAll(icon, title, tagline);
         return panel;
     }
+    /**
+     * Builds the login form panel.
+     * Handles authentication and navigation.
+     */
 
     private VBox buildFormPanel() {
         VBox panel = new VBox(20);

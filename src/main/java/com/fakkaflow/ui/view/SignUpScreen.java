@@ -7,10 +7,17 @@ import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
-
+/**
+ * Sign-up screen for creating a new user account.
+ * Includes validation and navigation to dashboard upon success.
+ */
 public class SignUpScreen {
     private final AuthService authService = new AuthService();
-
+    /**
+     * Builds the main layout.
+     *
+     * @return root Pane
+     */
     public Pane build() {
         HBox root = new HBox();
         root.getStyleClass().add("auth-root");
@@ -23,6 +30,9 @@ public class SignUpScreen {
         root.getChildren().addAll(leftPanel, formPanel);
         return root;
     }
+    /**
+     * Builds left branding and features panel.
+     */
 
     private VBox buildLeftPanel() {
         VBox panel = new VBox(20);
@@ -53,7 +63,10 @@ public class SignUpScreen {
         panel.getChildren().addAll(icon, title, tagline, features);
         return panel;
     }
-
+    /**
+     * Builds the registration form panel.
+     * Handles input validation and account creation.
+     */
     private VBox buildFormPanel() {
         VBox panel = new VBox(20);
         panel.getStyleClass().add("auth-right");

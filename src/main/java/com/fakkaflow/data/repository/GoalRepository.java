@@ -3,10 +3,17 @@ package com.fakkaflow.data.repository;
 import com.fakkaflow.data.model.Goal;
 import java.sql.*;
 import java.util.*;
-
+/**
+ * Repository class for managing Goal entities.
+ */
 public class GoalRepository {
     private final SQLiteDatabase db = SQLiteDatabase.getInstance();
 
+    /**
+     * Inserts a new goal.
+     *
+     * @param goal goal object
+     */
     public void save(Goal goal) {
         try {
             db.executeInsert(
@@ -15,7 +22,12 @@ public class GoalRepository {
             );
         } catch (SQLException e) { e.printStackTrace(); }
     }
-
+    /**
+     * Updates saved amount for a goal.
+     *
+     * @param goalId goal ID
+     * @param contribution amount to add
+     */
     public void updateSavedAmount(int goalId, float contribution) {
         try {
             db.execute(
@@ -24,13 +36,23 @@ public class GoalRepository {
             );
         } catch (SQLException e) { e.printStackTrace(); }
     }
-
+    /**
+     * Deletes a goal.
+     *
+     * @param goalId goal ID
+     */
     public void delete(int goalId) {
         try {
             db.execute("DELETE FROM goals WHERE id=?", goalId);
         } catch (SQLException e) { e.printStackTrace(); }
     }
 
+    /**
+     * Retrieves all goals for a user.
+     *
+     * @param userId user ID
+     * @return list of goals
+     */
     public List<Goal> findAll(int userId) {
         List<Goal> list = new ArrayList<>();
         try {
@@ -41,7 +63,9 @@ public class GoalRepository {
         } catch (SQLException e) { e.printStackTrace(); }
         return list;
     }
-
+    /**
+     * Maps a result set row to a Goal object.
+     */
     private Goal mapRow(ResultSet rs) throws SQLException {
         Goal g = new Goal();
         g.setId(rs.getInt("id"));

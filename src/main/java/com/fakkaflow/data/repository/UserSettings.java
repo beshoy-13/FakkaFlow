@@ -1,12 +1,16 @@
 package com.fakkaflow.data.model;
-
+/**
+ * Represents user preferences and settings.
+ */
 public class UserSettings {
     private int id;
     private int userId;
     private String currency;
     private String language;
     private boolean notificationsEnabled;
-
+    /**
+     * Default constructor with default settings.
+     */
     public UserSettings() {
         this.currency = "EGP";
         this.language = "English";

@@ -1,44 +1,64 @@
 package com.fakkaflow.data.repository;
 
 import java.sql.*;
-
+/**
+ * Singleton class for managing SQLite database connection and operations.
+ */
 public class SQLiteDatabase {
     private static final String DB_URL = "jdbc:sqlite:fakkaflow.db";
     private static SQLiteDatabase instance;
     private Connection connection;
 
     private SQLiteDatabase() {}
-
+    /**
+     * Returns the singleton instance.
+     */
     public static SQLiteDatabase getInstance() {
         if (instance == null) instance = new SQLiteDatabase();
         return instance;
     }
 
+    /**
+     * Opens database connection.
+     */
     public void open() throws SQLException {
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(DB_URL);
             connection.setAutoCommit(true);
         }
     }
-
+    /**
+     * Closes database connection.
+     */
     public void close() {
         try {
             if (connection != null && !connection.isClosed()) connection.close();
         } catch (SQLException ignored) {}
     }
-
+    /**
+     * Executes SELECT query.
+     *
+     * @param sql query
+     * @param params parameters
+     * @return result set
+     */
     public ResultSet query(String sql, Object... params) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(sql);
         for (int i = 0; i < params.length; i++) stmt.setObject(i + 1, params[i]);
         return stmt.executeQuery();
     }
 
+    /**
+     * Executes UPDATE/DELETE query.
+     */
     public int execute(String sql, Object... params) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(sql);
         for (int i = 0; i < params.length; i++) stmt.setObject(i + 1, params[i]);
         return stmt.executeUpdate();
     }
-
+    /**
+     * Executes INSERT query and returns generated ID.
+     */
     public long executeInsert(String sql, Object... params) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         for (int i = 0; i < params.length; i++) stmt.setObject(i + 1, params[i]);
@@ -47,6 +67,12 @@ public class SQLiteDatabase {
         return keys.next() ? keys.getLong(1) : -1;
     }
 
+    /**
+     * Initializes database schema by creating all required tables.
+     * Also seeds default categories.
+     *
+     * Throws RuntimeException if initialization fails.
+     */
     public void initializeSchema() {
         try {
             open();
@@ -119,13 +145,21 @@ public class SQLiteDatabase {
             throw new RuntimeException("DB init failed: " + e.getMessage(), e);
         }
     }
-
+    /**
+     * Inserts default categories into the database if they don't exist.
+     *
+     * @throws SQLException if insertion fails
+     */
     private void seedCategories() throws SQLException {
         String[] defaults = {"Food", "Transport", "Shopping", "Health", "Entertainment", "Utilities", "Salary", "Other"};
         for (String cat : defaults) {
             execute("INSERT OR IGNORE INTO categories (name) VALUES (?)", cat);
         }
     }
-
+    /**
+     * Returns the active database connection.
+     *
+     * @return Connection object
+     */
     public Connection getConnection() { return connection; }
 }

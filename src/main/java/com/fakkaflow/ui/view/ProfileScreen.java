@@ -11,12 +11,22 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
-
+/**
+ * Profile screen for displaying user information and managing settings.
+ * Allows users to:
+ * - View profile details
+ * - Update preferences (currency, language, notifications)
+ */
 public class ProfileScreen {
     private final UserSettingsRepository settingsRepo = new UserSettingsRepository();
     private final int userId = SessionManager.getInstance().getCurrentUserId();
     private final User user  = SessionManager.getInstance().getCurrentUser();
 
+    /**
+     * Builds main layout.
+     *
+     * @return root Pane
+     */
     public Pane build() {
         HBox root = new HBox();
         root.getStyleClass().add("app-root");
@@ -26,7 +36,9 @@ public class ProfileScreen {
         root.getChildren().addAll(nav, content);
         return root;
     }
-
+    /**
+     * Builds main content.
+     */
     private VBox buildContent() {
         VBox content = new VBox(24);
         content.getStyleClass().add("content-area");
@@ -38,7 +50,9 @@ public class ProfileScreen {
         content.getChildren().addAll(heading, sub, buildProfileCard(), buildSettingsCard());
         return content;
     }
-
+    /**
+     * Builds profile card with user info.
+     */
     private VBox buildProfileCard() {
         VBox card = UIFactory.card("Account");
 
@@ -67,7 +81,9 @@ public class ProfileScreen {
         card.getChildren().add(row);
         return card;
     }
-
+    /**
+     * Builds settings card for user preferences.
+     */
     private VBox buildSettingsCard() {
         UserSettings settings = settingsRepo.load(userId);
         VBox card = UIFactory.card("Preferences");
@@ -132,11 +148,17 @@ public class ProfileScreen {
         return card;
     }
 
+    /**
+     * Creates column constraint helper.
+     */
     private ColumnConstraints colConstraint(double w) {
         ColumnConstraints c = new ColumnConstraints();
         c.setPrefWidth(w);
         return c;
     }
+    /**
+     * Extracts initials from user name.
+     */
 
     private String getInitials(String name) {
         if (name == null || name.isEmpty()) return "?";

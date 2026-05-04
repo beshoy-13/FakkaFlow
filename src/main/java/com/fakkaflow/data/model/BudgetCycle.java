@@ -1,16 +1,30 @@
 package com.fakkaflow.data.model;
 
 import java.time.LocalDate;
-
+/**
+ * Represents a budget cycle for a user.
+ *
+ * Defines the total allowance and the time range for budgeting.
+ */
 public class BudgetCycle {
     private int cycleId;
     private int userId;
     private float totalAllowance;
     private LocalDate startDate;
     private LocalDate endDate;
-
+    /**
+     * Default constructor.
+     */
     public BudgetCycle() {}
 
+    /**
+     * Creates a new budget cycle.
+     *
+     * @param userId ID of the user
+     * @param totalAllowance total budget for the cycle
+     * @param startDate start date of the cycle
+     * @param endDate end date of the cycle
+     */
     public BudgetCycle(int userId, float totalAllowance, LocalDate startDate, LocalDate endDate) {
         this.userId = userId;
         this.totalAllowance = totalAllowance;

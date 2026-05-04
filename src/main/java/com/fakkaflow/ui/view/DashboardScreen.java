@@ -8,12 +8,21 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 import java.util.List;
-
+/**
+ * Dashboard screen displaying financial overview.
+ * Shows:
+ * - Balance and stats
+ * - Current budget cycle
+ * - Alerts
+ * - Recent transactions
+ */
 public class DashboardScreen {
     private final BudgetService budgetService = new BudgetService();
     private final AlertingService alertingService = new AlertingService();
     private final int userId = SessionManager.getInstance().getCurrentUserId();
-
+    /**
+     * Builds the main layout.
+     */
     public Pane build() {
         HBox root = new HBox();
         root.getStyleClass().add("app-root");
@@ -24,7 +33,9 @@ public class DashboardScreen {
         root.getChildren().addAll(nav, content);
         return root;
     }
-
+    /**
+     * Builds main content.
+     */
     private VBox buildContent() {
         VBox content = new VBox(24);
         content.getStyleClass().add("content-area");
@@ -41,7 +52,9 @@ public class DashboardScreen {
         content.getChildren().addAll(heading, sub, statsRow, cycleCard, alertsSection, recentSection);
         return content;
     }
-
+    /**
+     * Builds statistics row.
+     */
     private HBox buildStatsRow() {
         HBox row = new HBox(16);
 
@@ -60,6 +73,9 @@ public class DashboardScreen {
         return row;
     }
 
+    /**
+     * Creates a stat card.
+     */
     private VBox buildStatCard(String label, String value, String style) {
         VBox card = UIFactory.card(null);
         card.setAlignment(Pos.CENTER_LEFT);
@@ -74,7 +90,9 @@ public class DashboardScreen {
         card.getChildren().addAll(lbl, val);
         return card;
     }
-
+    /**
+     * Builds current cycle card.
+     */
     private VBox buildCycleCard() {
         VBox card = UIFactory.card("📅 Current Budget Cycle");
         BudgetCycle cycle = budgetService.getCurrentCycle(userId);
@@ -105,6 +123,9 @@ public class DashboardScreen {
         return card;
     }
 
+    /**
+     * Helper method to display info item.
+     */
     private VBox infoItem(String label, String value) {
         VBox box = new VBox(4);
         Label lbl = new Label(label);
@@ -114,7 +135,9 @@ public class DashboardScreen {
         box.getChildren().addAll(lbl, val);
         return box;
     }
-
+    /**
+     * Builds alerts section.
+     */
     private VBox buildAlertsSection() {
         List<Budget> budgets = budgetService.getBudgets(userId);
         List<AlertingService.BudgetAlert> alerts = alertingService.checkBudgets(budgets);
@@ -130,7 +153,9 @@ public class DashboardScreen {
         }
         return section;
     }
-
+    /**
+     * Builds recent transactions list.
+     */
     private VBox buildRecentTransactions() {
         VBox section = UIFactory.card("🕐 Recent Transactions");
         com.fakkaflow.data.repository.TransactionRepository repo = new com.fakkaflow.data.repository.TransactionRepository();

@@ -12,12 +12,22 @@ import javafx.scene.layout.*;
 
 import java.time.LocalDate;
 import java.util.*;
-
+/**
+ * Screen responsible for generating financial reports and insights.
+ * Displays charts and summaries such as:
+ * - Income vs expenses
+ * - Category spending
+ * - Monthly trends
+ */
 public class ReportScreen {
     private final TransactionRepository transactionRepository = new TransactionRepository();
     private final int userId = SessionManager.getInstance().getCurrentUserId();
     private VBox chartsArea;
-
+    /**
+     * Builds main layout.
+     *
+     * @return root Pane
+     */
     public Pane build() {
         HBox root = new HBox();
         root.getStyleClass().add("app-root");
@@ -28,6 +38,9 @@ public class ReportScreen {
         return root;
     }
 
+    /**
+     * Builds main content.
+     */
     private VBox buildContent() {
         VBox content = new VBox(20);
         content.getStyleClass().add("content-area");
@@ -49,7 +62,9 @@ public class ReportScreen {
         content.getChildren().addAll(heading, sub, filterRow, scroll);
         return content;
     }
-
+    /**
+     * Builds filter row for selecting report period.
+     */
     private HBox buildFilterRow(VBox content) {
         HBox row = new HBox(12);
         row.setAlignment(Pos.CENTER_LEFT);
@@ -70,7 +85,9 @@ public class ReportScreen {
         row.getChildren().addAll(new Label("Period:"), rangeCombo, generateBtn);
         return row;
     }
-
+    /**
+     * Calculates date range based on selected period.
+     */
     private LocalDate[] getDateRange(String period) {
         LocalDate end = LocalDate.now();
         LocalDate start = switch (period) {
@@ -81,6 +98,9 @@ public class ReportScreen {
         };
         return new LocalDate[]{start, end};
     }
+    /**
+     * Generates report based on filters.
+     */
 
     private void generateReport(LocalDate start, LocalDate end) {
         chartsArea.getChildren().clear();
@@ -124,7 +144,9 @@ public class ReportScreen {
         chartsArea.getChildren().add(buildBarChart(monthlyIncome, monthlyExpense));
         chartsArea.getChildren().add(buildInsightSection(categorySpend, totalExpenses));
     }
-
+    /**
+     * Builds summary cards.
+     */
     private HBox buildSummaryCards(float income, float expenses) {
         HBox row = new HBox(16);
         float net = income - expenses;
@@ -138,7 +160,9 @@ public class ReportScreen {
         for (javafx.scene.Node n : row.getChildren()) HBox.setHgrow(n, Priority.ALWAYS);
         return row;
     }
-
+    /**
+     * Builds a single summary card.
+     */
     private VBox summaryCard(String label, String value, String style) {
         VBox card = UIFactory.card(null);
         card.getStyleClass().add("stat-card");
@@ -149,6 +173,9 @@ public class ReportScreen {
         card.getChildren().addAll(lbl, val);
         return card;
     }
+    /**
+     * Builds pie chart for category spending.
+     */
 
     private VBox buildPieChart(Map<String, Float> categorySpend) {
         VBox card = UIFactory.card("🥧 Spending by Category");
@@ -166,7 +193,9 @@ public class ReportScreen {
         card.getChildren().add(pie);
         return card;
     }
-
+    /**
+     * Builds bar chart for income vs expenses.
+     */
     private VBox buildBarChart(Map<String, Float> income, Map<String, Float> expense) {
         VBox card = UIFactory.card("📊 Income vs Expenses");
 
@@ -197,7 +226,9 @@ public class ReportScreen {
         card.getChildren().add(chart);
         return card;
     }
-
+    /**
+     * Builds insights section.
+     */
     private VBox buildInsightSection(Map<String, Float> categorySpend, float totalExpenses) {
         VBox card = UIFactory.card("💡 Insights");
         if (categorySpend.isEmpty()) return card;

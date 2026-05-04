@@ -3,10 +3,17 @@ package com.fakkaflow.data.repository;
 import com.fakkaflow.data.model.BudgetCycle;
 import java.sql.*;
 import java.time.LocalDate;
-
+/**
+ * Repository class for managing BudgetCycle entities.
+ */
 public class CycleRepository {
     private final SQLiteDatabase db = SQLiteDatabase.getInstance();
-
+    /**
+     * Saves a budget cycle for a user.
+     * Deletes any existing cycle before inserting a new one.
+     *
+     * @param cycle budget cycle object
+     */
     public void save(BudgetCycle cycle) {
         try {
             db.execute("DELETE FROM budget_cycles WHERE user_id=?", cycle.getUserId());
@@ -17,7 +24,12 @@ public class CycleRepository {
             );
         } catch (SQLException e) { e.printStackTrace(); }
     }
-
+    /**
+     * Loads the latest budget cycle for a user.
+     *
+     * @param userId user ID
+     * @return BudgetCycle or null if not found
+     */
     public BudgetCycle load(int userId) {
         try {
             ResultSet rs = db.query(
@@ -35,7 +47,11 @@ public class CycleRepository {
         } catch (SQLException e) { e.printStackTrace(); }
         return null;
     }
-
+    /**
+     * Deletes a user's budget cycle.
+     *
+     * @param userId user ID
+     */
     public void delete(int userId) {
         try {
             db.execute("DELETE FROM budget_cycles WHERE user_id=?", userId);

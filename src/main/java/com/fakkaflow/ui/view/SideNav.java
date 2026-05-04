@@ -7,10 +7,22 @@ import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
+/**
+ * Side navigation component for the application.
+ * Provides navigation between main screens and logout functionality.
+ */
 
 public class SideNav {
+    /**
+     * Enum representing navigation items.
+     */
     public enum NavItem { DASHBOARD, TRANSACTIONS, BUDGET, GOALS, REPORTS, PROFILE }
-
+    /**
+     * Builds side navigation UI.
+     *
+     * @param active currently active screen
+     * @return VBox navigation panel
+     */
     public VBox build(NavItem active) {
         VBox nav = new VBox(4);
         nav.getStyleClass().add("sidenav");
@@ -50,13 +62,22 @@ public class SideNav {
     // ── Small colored dot used as icon ─────────────────────────────────────
     private static final String ACCENT  = "#6366f1";
     private static final String MUTED   = "#64748b";
-
+    /**
+     * Creates a small colored dot icon.
+     *
+     * @param hex color value
+     * @return Circle icon
+     */
     private Circle dot(String hex) {
         Circle c = new Circle(4);
         c.setFill(javafx.scene.paint.Color.web(hex));
         return c;
     }
-
+    /**
+     * Creates user avatar circle.
+     *
+     * @return Circle avatar
+     */
     private Circle circle() {
         Circle c = new Circle(5);
         c.setFill(javafx.scene.paint.Color.web("#334155"));
@@ -64,7 +85,11 @@ public class SideNav {
         c.setStrokeWidth(1.5);
         return c;
     }
-
+    /**
+     * Creates active indicator pip.
+     *
+     * @return Rectangle indicator
+     */
     private Rectangle activePip() {
         Rectangle r = new Rectangle(3, 14);
         r.setFill(javafx.scene.paint.Color.web(ACCENT));
@@ -72,6 +97,11 @@ public class SideNav {
         r.setArcHeight(3);
         return r;
     }
+    /**
+     * Creates inactive indicator pip.
+     *
+     * @return Rectangle indicator
+     */
 
     private Rectangle mutedPip() {
         Rectangle r = new Rectangle(3, 14);
@@ -80,6 +110,14 @@ public class SideNav {
         r.setArcHeight(3);
         return r;
     }
+    /**
+     * Creates a row with icon and label.
+     *
+     * @param icon UI icon
+     * @param text label text
+     * @param styleClass CSS class
+     * @return HBox row
+     */
 
     // ── Generic row: shape + label ─────────────────────────────────────────
     private HBox makeRow(javafx.scene.Node icon, String text, String styleClass) {
@@ -90,8 +128,15 @@ public class SideNav {
         row.getChildren().addAll(icon, lbl);
         return row;
     }
-
-    // ── Nav button with colored pip as icon ────────────────────────────────
+    /**
+     * Adds navigation button to sidebar.
+     *
+     * @param nav parent container
+     * @param ignored unused parameter
+     * @param text button text
+     * @param item navigation item
+     * @param active active item
+     */    // ── Nav button with colored pip as icon ────────────────────────────────
     private void addNavBtn(VBox nav, String ignored, String text, NavItem item, NavItem active) {
         boolean isActive = item == active;
 
@@ -114,6 +159,11 @@ public class SideNav {
         btn.setOnAction(e -> navigate(item));
         nav.getChildren().add(btn);
     }
+    /**
+     * Builds logout button.
+     *
+     * @return Button logout button
+     */
 
     // ── Logout button ──────────────────────────────────────────────────────
     private Button buildLogoutBtn() {
@@ -140,7 +190,11 @@ public class SideNav {
         });
         return btn;
     }
-
+    /**
+     * Handles navigation between screens.
+     *
+     * @param item selected navigation item
+     */
     private void navigate(NavItem item) {
         SceneManager sm = SceneManager.getInstance();
         switch (item) {
@@ -152,6 +206,12 @@ public class SideNav {
             case PROFILE      -> sm.navigateTo(new ProfileScreen().build(),     "Profile");
         }
     }
+    /**
+     * Creates vertical spacer.
+     *
+     * @param h height
+     * @return Region spacer
+     */
 
     private Region spacer(double h) {
         Region r = new Region();

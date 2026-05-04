@@ -3,8 +3,13 @@ package com.fakkaflow.logic.service;
 import com.fakkaflow.data.model.Goal;
 import com.fakkaflow.data.repository.GoalRepository;
 import java.util.List;
-
+/**
+ * Service responsible for managing financial goals.
+ */
 public class GoalService {
+    /**
+     * Saves a goal after validation.
+     */
     private final GoalRepository goalRepository = new GoalRepository();
 
     public void saveGoal(Goal goal) throws Exception {
@@ -14,7 +19,9 @@ public class GoalService {
             throw new Exception("Target amount must be greater than zero.");
         goalRepository.save(goal);
     }
-
+    /**
+     * Adds contribution to a goal.
+     */
     public void addContribution(int goalId, float contribution) throws Exception {
         if (contribution <= 0) throw new Exception("Contribution must be greater than zero.");
         goalRepository.updateSavedAmount(goalId, contribution);
@@ -28,6 +35,9 @@ public class GoalService {
         return goalRepository.findAll(userId);
     }
 
+    /**
+     * Calculates required monthly saving.
+     */
     public float calculateMonthlySavingsNeeded(Goal goal) {
         if (goal.getDeadline() == null || goal.getDeadline().isEmpty()) return 0;
         try {

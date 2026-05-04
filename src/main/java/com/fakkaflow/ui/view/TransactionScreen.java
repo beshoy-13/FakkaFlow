@@ -10,7 +10,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 import java.util.List;
-
+/**
+ * Screen for managing transactions.
+ * Provides features to:
+ * - Add new transactions
+ * - Filter transactions
+ * - View transaction table
+ * - Delete transactions
+ */
 public class TransactionScreen {
     private final TransactionRepository transactionRepository = new TransactionRepository();
     private final CategoryRepository categoryRepository = new CategoryRepository();
@@ -20,7 +27,11 @@ public class TransactionScreen {
     private TableView<Transaction> table;
     private ComboBox<String> typeFilter;
     private ComboBox<Category> catFilter;
-
+    /**
+     * Builds main layout.
+     *
+     * @return root Pane
+     */
     public Pane build() {
         HBox root = new HBox();
         root.getStyleClass().add("app-root");
@@ -31,6 +42,9 @@ public class TransactionScreen {
         return root;
     }
 
+    /**
+     * Builds main content area.
+     */
     private VBox buildContent() {
         VBox content = new VBox(20);
         content.getStyleClass().add("content-area");
@@ -54,7 +68,9 @@ public class TransactionScreen {
         content.getChildren().addAll(heading, topRow, filterRow, table);
         return content;
     }
-
+    /**
+     * Builds filter row UI.
+     */
     private HBox buildFilterRow() {
         HBox row = new HBox(12);
         row.setAlignment(Pos.CENTER_LEFT);
@@ -90,7 +106,9 @@ public class TransactionScreen {
         row.getChildren().addAll(new Label("Type:"), typeFilter, new Label("Category:"), catFilter, applyBtn, clearBtn, spacer);
         return row;
     }
-
+    /**
+     * Builds transactions table.
+     */
     private TableView<Transaction> buildTable() {
         TableView<Transaction> tv = new TableView<>(txList);
         tv.getStyleClass().add("styled-table");
@@ -162,21 +180,27 @@ public class TransactionScreen {
         tv.setPlaceholder(new Label("No transactions found."));
         return tv;
     }
-
+    /**
+     * Applies selected filters.
+     */
     private void applyFilters() {
         String type = "All".equals(typeFilter.getValue()) ? null : typeFilter.getValue();
         Category cat = catFilter.getValue();
         Integer catId = (cat != null && cat.getCategoryId() > 0) ? cat.getCategoryId() : null;
         loadTransactions(type, catId, null, null);
     }
-
+    /**
+     * Loads transactions based on filters.
+     */
     private void loadTransactions(String type, Integer catId, String start, String end) {
         List<Transaction> list = (type == null && catId == null && start == null && end == null)
             ? transactionRepository.findAll(userId)
             : transactionRepository.findByFilter(userId, type, catId, start, end);
         txList.setAll(list);
     }
-
+    /**
+     * Shows dialog to add new transaction.
+     */
     private void showAddDialog() {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Add Transaction");

@@ -1,5 +1,10 @@
 package com.fakkaflow.data.model;
-
+/**
+ * Represents a financial transaction (income or expense).
+ *
+ * Each transaction is linked to a user and a category,
+ * and includes amount, type, and timestamp.
+ */
 public class Transaction {
     private int transactionId;
     private int userId;
@@ -9,9 +14,19 @@ public class Transaction {
     private String categoryName;
     private String note;
     private String timestamp;
-
+    /**
+     * Default constructor.
+     */
     public Transaction() {}
-
+    /**
+     * Creates a new transaction.
+     *
+     * @param userId ID of the user
+     * @param amount transaction amount
+     * @param type type of transaction (income or expense)
+     * @param categoryId category ID
+     * @param note optional note
+     */
     public Transaction(int userId, float amount, String type, int categoryId, String note) {
         this.userId = userId;
         this.amount = amount;

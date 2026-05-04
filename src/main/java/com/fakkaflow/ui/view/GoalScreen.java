@@ -8,11 +8,20 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 import java.util.List;
-
+/**
+ * Screen for managing financial goals.
+ * Allows users to:
+ * - Create goals
+ * - Track progress
+ * - Add contributions
+ */
 public class GoalScreen {
     private final GoalService goalService = new GoalService();
     private final int userId = SessionManager.getInstance().getCurrentUserId();
 
+    /**
+     * Builds main layout.
+     */
     public Pane build() {
         HBox root = new HBox();
         root.getStyleClass().add("app-root");
@@ -22,6 +31,9 @@ public class GoalScreen {
         root.getChildren().addAll(nav, content);
         return root;
     }
+    /**
+     * Builds main content.
+     */
 
     private VBox buildContent() {
         VBox content = new VBox(24);
@@ -42,7 +54,9 @@ public class GoalScreen {
         content.getChildren().addAll(heading, sub, topRow, goalsSection);
         return content;
     }
-
+    /**
+     * Builds goals list section.
+     */
     private VBox buildGoalsList() {
         VBox section = new VBox(16);
         List<Goal> goals = goalService.getGoals(userId);
@@ -64,6 +78,11 @@ public class GoalScreen {
         }
         return section;
     }
+    /**
+     * Builds a single goal card UI.
+     *
+     * @param goal goal object
+     */
 
     private VBox buildGoalCard(Goal goal) {
         VBox card = UIFactory.card(null);
@@ -112,7 +131,9 @@ public class GoalScreen {
         card.getChildren().addAll(pb, pctLbl);
         return card;
     }
-
+    /**
+     * Shows dialog to create new goal.
+     */
     private void showAddGoalDialog() {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Create Financial Goal");
@@ -165,7 +186,11 @@ public class GoalScreen {
 
         dialog.showAndWait();
     }
-
+    /**
+     * Shows dialog to contribute to goal.
+     *
+     * @param goal goal object
+     */
     private void showContributeDialog(Goal goal) {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Add Contribution to: " + goal.getName());
@@ -202,7 +227,9 @@ public class GoalScreen {
 
         dialog.showAndWait();
     }
-
+    /**
+     * Helper info item.
+     */
     private VBox infoItem(String label, String value) {
         VBox box = new VBox(4);
         Label lbl = new Label(label);

@@ -1,4 +1,8 @@
 package com.fakkaflow.data.model;
+/**
+ * Represents a user in the system.
+ * Stores authentication and profile information.
+ */
 
 public class User {
     private int id;
@@ -7,8 +11,20 @@ public class User {
     private String passwordHash;
     private String createdAt;
 
-    public User() {}
 
+    /**
+     * Default constructor.
+     */
+    public User() {}
+    /**
+     * Creates a new user.
+     *
+     * @param id user ID
+     * @param name user name
+     * @param email user email
+     * @param passwordHash hashed password
+     * @param createdAt account creation timestamp
+     */
     public User(int id, String name, String email, String passwordHash, String createdAt) {
         this.id = id;
         this.name = name;

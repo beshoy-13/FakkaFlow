@@ -1,0 +1,4 @@
+com.fakkaflow.data.model
+com.fakkaflow.data.repository
+com.fakkaflow.logic.engine
+com.fakkaflow.logic.service

@@ -7,9 +7,18 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+/**
+ * Entry point of the FakkaFlow application.
+ *
+ * Initializes the database and launches the JavaFX application.
+ */
 public class MainApp extends Application {
 
+    /**
+     * Starts the JavaFX application and loads the first scene.
+     *
+     * @param primaryStage primary stage
+     */
     @Override
     public void start(Stage primaryStage) {
         SQLiteDatabase.getInstance().initializeSchema();

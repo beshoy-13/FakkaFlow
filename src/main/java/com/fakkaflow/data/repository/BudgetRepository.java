@@ -4,9 +4,19 @@ import com.fakkaflow.data.model.Budget;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Repository class for managing Budget entities in the database.
+ * Provides CRUD operations for budgets.
+ */
 public class BudgetRepository {
     private final SQLiteDatabase db = SQLiteDatabase.getInstance();
-
+    /**
+     * Saves a budget.
+     * If a budget already exists for the same user and category,
+     * it updates the existing record; otherwise, it inserts a new one.
+     *
+     * @param budget the budget to save
+     */
     public void save(Budget budget) {
         try {
             ResultSet existing = db.query(
@@ -26,7 +36,12 @@ public class BudgetRepository {
             }
         } catch (SQLException e) { e.printStackTrace(); }
     }
-
+    /**
+     * Retrieves all budgets for a specific user.
+     *
+     * @param userId the user ID
+     * @return list of budgets
+     */
     public List<Budget> findAll(int userId) {
         List<Budget> list = new ArrayList<>();
         try {
@@ -38,13 +53,23 @@ public class BudgetRepository {
         } catch (SQLException e) { e.printStackTrace(); }
         return list;
     }
-
+    /**
+     * Deletes a budget by its ID.
+     *
+     * @param budgetId the budget ID
+     */
     public void delete(int budgetId) {
         try {
             db.execute("DELETE FROM budgets WHERE id=?", budgetId);
         } catch (SQLException e) { e.printStackTrace(); }
     }
-
+    /**
+     * Maps a database row to a Budget object.
+     *
+     * @param rs the result set
+     * @return mapped Budget object
+     * @throws SQLException if database error occurs
+     */
     private Budget mapRow(ResultSet rs) throws SQLException {
         Budget b = new Budget();
         b.setId(rs.getInt("id"));

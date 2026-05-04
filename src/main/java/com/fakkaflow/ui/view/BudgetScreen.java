@@ -11,13 +11,28 @@ import javafx.scene.layout.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * UI screen responsible for managing budgets and budget cycles.
+ * Allows users to:
+ * - View current cycle
+ * - Add/edit budgets
+ * - Track spending and alerts
+ */
 public class BudgetScreen {
+
     private final BudgetService budgetService = new BudgetService();
+
     private final AlertingService alertingService = new AlertingService();
+
     private final CategoryRepository categoryRepository = new CategoryRepository();
+
     private final int userId = SessionManager.getInstance().getCurrentUserId();
 
+    /**
+     * Builds the main layout of the screen.
+     *
+     * @return root Pane
+     */
     public Pane build() {
         HBox root = new HBox();
         root.getStyleClass().add("app-root");
@@ -27,7 +42,11 @@ public class BudgetScreen {
         root.getChildren().addAll(nav, content);
         return root;
     }
-
+    /**
+     * Builds the main content area.
+     *
+     * @return VBox content
+     */
     private VBox buildContent() {
         VBox content = new VBox(24);
         content.getStyleClass().add("content-area");
@@ -43,6 +62,10 @@ public class BudgetScreen {
         content.getChildren().addAll(heading, sub, cycleSection, alertsSection, budgetsSection);
         return content;
     }
+
+    /**
+     * Builds budget cycle section.
+     */
 
     private VBox buildCycleSection() {
         VBox card = UIFactory.card("📅 Budget Cycle");
@@ -64,7 +87,9 @@ public class BudgetScreen {
         card.getChildren().add(setupBtn);
         return card;
     }
-
+    /**
+     * Builds alerts section based on budget usage.
+     */
     private VBox buildAlertsSection() {
         List<Budget> budgets = budgetService.getBudgets(userId);
         List<AlertingService.BudgetAlert> alerts = alertingService.checkBudgets(budgets);
@@ -81,6 +106,9 @@ public class BudgetScreen {
         return section;
     }
 
+    /**
+     * Builds category budgets section.
+     */
     private VBox buildBudgetsSection() {
         VBox section = UIFactory.card("💳 Category Budgets");
 
@@ -104,7 +132,12 @@ public class BudgetScreen {
         }
         return section;
     }
-
+    /**
+     * Builds a single budget row UI.
+     *
+     * @param b budget object
+     * @param parent parent container
+     */
     private HBox buildBudgetRow(Budget b, VBox parent) {
         HBox row = new HBox(16);
         row.setAlignment(Pos.CENTER_LEFT);
@@ -140,7 +173,11 @@ public class BudgetScreen {
         row.getChildren().addAll(info, progressBox, delBtn);
         return row;
     }
-
+    /**
+     * Shows dialog for creating/editing budget cycle.
+     *
+     * @param existing existing cycle (optional)
+     */
     private void showCycleDialog(BudgetCycle existing) {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Budget Cycle Setup");
@@ -189,7 +226,9 @@ public class BudgetScreen {
 
         dialog.showAndWait();
     }
-
+    /**
+     * Shows dialog for adding new category budget.
+     */
     private void showAddBudgetDialog(VBox parent) {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Add Category Budget");
@@ -244,7 +283,9 @@ public class BudgetScreen {
 
         dialog.showAndWait();
     }
-
+    /**
+     * Helper method to display info item.
+     */
     private VBox infoItem(String label, String value) {
         VBox box = new VBox(4);
         Label lbl = new Label(label);

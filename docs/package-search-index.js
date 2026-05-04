@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"l":"com.fakkaflow.data.model"},{"l":"com.fakkaflow.data.repository"},{"l":"com.fakkaflow.logic.engine"},{"l":"com.fakkaflow.logic.service"}];updateSearchResults();
